@@ -1,0 +1,1 @@
+insert into conta(id, nome_pessoa) values (1, 'Guilherme');
