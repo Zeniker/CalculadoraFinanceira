@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -43,6 +44,7 @@ public class Movimentacao {
     private LocalDate dataCobranca;
 
     @NotNull
+    @Min(0)
     private BigDecimal valorMovimentacao;
 
     @NotNull
@@ -133,6 +135,10 @@ public class Movimentacao {
     }
 
     public void setValorMovimentacao(BigDecimal valorMovimentacao) {
+        if(valorMovimentacao.compareTo(BigDecimal.ZERO) <= 0){
+            throw new IllegalArgumentException("Valor da movimentação não pode ser menor ou igual a zero");
+        }
+
         this.valorMovimentacao = valorMovimentacao;
     }
 
