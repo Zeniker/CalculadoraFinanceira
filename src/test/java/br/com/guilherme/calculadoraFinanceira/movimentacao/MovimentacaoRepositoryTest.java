@@ -30,7 +30,6 @@ public class MovimentacaoRepositoryTest {
 
     private Conta conta;
 
-
     @Before
     public void setUp() throws Exception {
         conta = new Conta();

@@ -45,12 +45,27 @@ public class Movimentacao {
     @NotNull
     private BigDecimal valorMovimentacao;
 
+    @NotNull
+    private TipoMovimentacao tipoMovimentacao;
+
     public enum StatusMovimentacao {
         ATIVO, INATIVO, CANCELADO
     }
 
     public enum TipoMovimentacao {
-        GASTO, GANHO, INVESTIMENTO
+        GASTO(new TipoMovimentacaoGasto()),
+        GANHO(new TipoMovimentacaoGanho()),
+        INVESTIMENTO(new TipoMovimentacaoInvestimento());
+
+        private br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao objetoTipoMovimentacao;
+
+        TipoMovimentacao(br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao objetoTipoMovimentacao){
+            this.objetoTipoMovimentacao = objetoTipoMovimentacao;
+        }
+
+        public br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao getObjetoTipoMovimentacao(){
+            return this.objetoTipoMovimentacao;
+        }
     }
 
     public Integer getId() {
@@ -119,5 +134,17 @@ public class Movimentacao {
 
     public void setValorMovimentacao(BigDecimal valorMovimentacao) {
         this.valorMovimentacao = valorMovimentacao;
+    }
+
+    public BigDecimal getSaldo(){
+        return this.tipoMovimentacao.getObjetoTipoMovimentacao().getSaldo(this);
+    }
+
+    public TipoMovimentacao getTipoMovimentacao() {
+        return tipoMovimentacao;
+    }
+
+    public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
+        this.tipoMovimentacao = tipoMovimentacao;
     }
 }
