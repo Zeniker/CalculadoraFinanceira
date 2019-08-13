@@ -23,7 +23,7 @@ public class CalculadoraSaldoMesConta {
     /**
      * @param conta Conta que deve ser calculado o saldo
      * @param month Mês relativo do saldo
-     * @return
+     * @return BigDecimal do saldo calculado
      */
     public BigDecimal calcula(Conta conta, Month month){
         List<Movimentacao> movimentacoes = movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,

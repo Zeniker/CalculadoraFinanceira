@@ -62,5 +62,13 @@ public class CalculadoraSaldoMesContaTest {
         assertEquals(new BigDecimal("350.00"), saldo);
     }
 
+    @Test
+    public void calculaSaldoMesSemMovimentacao() {
+        CalculadoraSaldoMesConta calculadoraSaldoMesConta = new CalculadoraSaldoMesConta(movimentacaoRepository);
+        BigDecimal saldo = calculadoraSaldoMesConta.calcula(conta, LocalDate.now().getMonth());
+
+        assertEquals(BigDecimal.ZERO, saldo);
+    }
+
 
 }
