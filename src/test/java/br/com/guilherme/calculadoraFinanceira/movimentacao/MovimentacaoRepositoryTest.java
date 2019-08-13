@@ -45,6 +45,7 @@ public class MovimentacaoRepositoryTest {
         mov.setStatus(status);
         mov.setDataCobranca(data);
         mov.setDataOperacao(data);
+        mov.setTipoMovimentacao(TipoMovimentacao.GANHO);
         mov.setValorMovimentacao(BigDecimal.ONE);
 
         return mov;

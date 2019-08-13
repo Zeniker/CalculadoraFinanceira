@@ -2,9 +2,9 @@ package br.com.guilherme.calculadoraFinanceira.movimentacao;
 
 import java.math.BigDecimal;
 
-public class TipoMovimentacaoGanho implements TipoMovimentacao {
+public class CalculadoraTipoMovimentacaoGasto implements CalculadoraTipoMovimentacao {
     @Override
     public BigDecimal getSaldo(Movimentacao movimentacao) {
-        return movimentacao.getValorMovimentacao();
+        return movimentacao.getValorMovimentacao().negate();
     }
 }

@@ -54,22 +54,6 @@ public class Movimentacao {
         ATIVO, INATIVO, CANCELADO
     }
 
-    public enum TipoMovimentacao {
-        GASTO(new TipoMovimentacaoGasto()),
-        GANHO(new TipoMovimentacaoGanho()),
-        INVESTIMENTO(new TipoMovimentacaoInvestimento());
-
-        private br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao objetoTipoMovimentacao;
-
-        TipoMovimentacao(br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao objetoTipoMovimentacao){
-            this.objetoTipoMovimentacao = objetoTipoMovimentacao;
-        }
-
-        public br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao getObjetoTipoMovimentacao(){
-            return this.objetoTipoMovimentacao;
-        }
-    }
-
     public Integer getId() {
         return id;
     }
@@ -143,7 +127,7 @@ public class Movimentacao {
     }
 
     public BigDecimal getSaldo(){
-        return this.tipoMovimentacao.getObjetoTipoMovimentacao().getSaldo(this);
+        return this.tipoMovimentacao.getCalculadoraTipoMovimentacao().getSaldo(this);
     }
 
     public TipoMovimentacao getTipoMovimentacao() {

@@ -6,15 +6,15 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-public class TipoMovimentacaoInvestimentoTest {
+public class CalculadoraTipoMovimentacaoInvestimentoTest {
 
     @Test
     public void getSaldo() {
-        TipoMovimentacao tipoMovimentacao = new TipoMovimentacaoInvestimento();
+        CalculadoraTipoMovimentacao calculadoraTipoMovimentacao = new CalculadoraTipoMovimentacaoInvestimento();
 
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setValorMovimentacao(BigDecimal.TEN);
 
-        assertEquals(new BigDecimal("-10"), tipoMovimentacao.getSaldo(movimentacao));
+        assertEquals(new BigDecimal("-10"), calculadoraTipoMovimentacao.getSaldo(movimentacao));
     }
 }

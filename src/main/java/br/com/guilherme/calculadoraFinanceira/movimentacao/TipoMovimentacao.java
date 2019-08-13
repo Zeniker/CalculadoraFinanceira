@@ -1,8 +1,17 @@
 package br.com.guilherme.calculadoraFinanceira.movimentacao;
 
-import java.math.BigDecimal;
+public enum TipoMovimentacao {
+    GASTO(new CalculadoraTipoMovimentacaoGasto()),
+    GANHO(new CalculadoraTipoMovimentacaoGanho()),
+    INVESTIMENTO(new CalculadoraTipoMovimentacaoInvestimento());
 
-public interface TipoMovimentacao {
+    private CalculadoraTipoMovimentacao calculadoraTipoMovimentacao;
 
-    BigDecimal getSaldo(Movimentacao movimentacao);
+    TipoMovimentacao(CalculadoraTipoMovimentacao calculadoraTipoMovimentacao){
+        this.calculadoraTipoMovimentacao = calculadoraTipoMovimentacao;
+    }
+
+    public CalculadoraTipoMovimentacao getCalculadoraTipoMovimentacao(){
+        return this.calculadoraTipoMovimentacao;
+    }
 }

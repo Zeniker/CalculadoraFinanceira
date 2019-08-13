@@ -2,6 +2,7 @@ package br.com.guilherme.calculadoraFinanceira.conta;
 
 import br.com.guilherme.calculadoraFinanceira.movimentacao.Movimentacao;
 import br.com.guilherme.calculadoraFinanceira.movimentacao.MovimentacaoRepository;
+import br.com.guilherme.calculadoraFinanceira.movimentacao.TipoMovimentacao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +45,7 @@ public class CalculadoraSaldoMesContaTest {
         mov.setDataCobranca(data);
         mov.setDataOperacao(data);
         mov.setValorMovimentacao(valor);
-        mov.setTipoMovimentacao(Movimentacao.TipoMovimentacao.GANHO);
+        mov.setTipoMovimentacao(TipoMovimentacao.GANHO);
 
         movimentacaoRepository.save(mov);
     }
