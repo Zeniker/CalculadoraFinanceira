@@ -45,7 +45,7 @@ public class Movimentacao {
 
     @NotNull
     @Min(0)
-    private BigDecimal valorMovimentacao;
+    private BigDecimal valor;
 
     @NotNull
     private TipoMovimentacao tipoMovimentacao;
@@ -114,16 +114,16 @@ public class Movimentacao {
         this.dataCobranca = dataCobranca;
     }
 
-    public BigDecimal getValorMovimentacao() {
-        return valorMovimentacao;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void setValorMovimentacao(BigDecimal valorMovimentacao) {
-        if(valorMovimentacao.compareTo(BigDecimal.ZERO) <= 0){
+    public void setValor(BigDecimal valor) {
+        if(valor.compareTo(BigDecimal.ZERO) <= 0){
             throw new IllegalArgumentException("Valor da movimentação não pode ser menor ou igual a zero");
         }
 
-        this.valorMovimentacao = valorMovimentacao;
+        this.valor = valor;
     }
 
     public BigDecimal getSaldo(){
@@ -136,5 +136,13 @@ public class Movimentacao {
 
     public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
         this.tipoMovimentacao = tipoMovimentacao;
+    }
+
+    public Integer getIdConta(){
+        return getConta() != null ? getConta().getId() : null;
+    }
+
+    public Integer getIdCartao(){
+        return getCartao() != null ? getCartao().getId() : null;
     }
 }

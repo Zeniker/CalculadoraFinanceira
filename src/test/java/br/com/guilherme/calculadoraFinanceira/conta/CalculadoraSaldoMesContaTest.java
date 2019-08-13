@@ -44,7 +44,7 @@ public class CalculadoraSaldoMesContaTest {
         mov.setStatus(Movimentacao.StatusMovimentacao.ATIVO);
         mov.setDataCobranca(data);
         mov.setDataOperacao(data);
-        mov.setValorMovimentacao(valor);
+        mov.setValor(valor);
         mov.setTipoMovimentacao(TipoMovimentacao.GANHO);
 
         movimentacaoRepository.save(mov);

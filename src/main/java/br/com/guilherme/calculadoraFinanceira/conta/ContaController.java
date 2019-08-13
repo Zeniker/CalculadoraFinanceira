@@ -58,7 +58,7 @@ public class ContaController {
     }
 
     @RequestMapping(value = "/{idConta}", method = RequestMethod.DELETE)
-    public DeletarContaResponseDTO atualizarConta(@PathVariable Integer idConta){
+    public DeletarContaResponseDTO deletarConta(@PathVariable Integer idConta){
         DeletarContaResponseDTO responseDTO;
         try{
             contaService.deletarConta(idConta);

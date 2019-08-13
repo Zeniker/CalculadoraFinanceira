@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 public class CalculadoraTipoMovimentacaoInvestimento implements CalculadoraTipoMovimentacao {
     @Override
     public BigDecimal getSaldo(Movimentacao movimentacao) {
-        return movimentacao.getValorMovimentacao().negate();
+        return movimentacao.getValor().negate();
     }
 }

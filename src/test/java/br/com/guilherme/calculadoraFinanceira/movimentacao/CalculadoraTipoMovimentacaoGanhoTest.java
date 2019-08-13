@@ -13,7 +13,7 @@ public class CalculadoraTipoMovimentacaoGanhoTest {
         CalculadoraTipoMovimentacao calculadoraTipoMovimentacao = new CalculadoraTipoMovimentacaoGanho();
 
         Movimentacao movimentacao = new Movimentacao();
-        movimentacao.setValorMovimentacao(BigDecimal.TEN);
+        movimentacao.setValor(BigDecimal.TEN);
 
         assertEquals(BigDecimal.TEN, calculadoraTipoMovimentacao.getSaldo(movimentacao));
     }

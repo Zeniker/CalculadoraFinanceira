@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Calculadora de saldo de uma conta
  */
-//@Service
 public class CalculadoraSaldoMesConta {
 
     private final MovimentacaoRepository movimentacaoRepository;
