@@ -32,16 +32,25 @@ class FormularioMovimentacao extends Component {
 
     return (
       <form>
-        <label htmlFor="valor">Valor</label>
-        <input id="valor" type="text" name="valor" value={valor} onChange={this.escutadorDeInput}/>
+        <div className="row">
+          <div className="input-field col s4">
 
-        <label htmlFor="tipo">Tipo</label>
-        <input id="tipo" type="text" name="tipo" value={tipo} onChange={this.escutadorDeInput}/>
+            <input id="valor" type="text" name="valor" value={valor} onChange={this.escutadorDeInput}/>
+            <label htmlFor="valor">Valor</label>
+          </div>
 
-        <label htmlFor="data">Data</label>
-        <input id="data" type="date" name="data" value={data} onChange={this.escutadorDeInput}/>
+          <div className="input-field col s4">
+            <label htmlFor="tipo">Tipo</label>
+            <input id="tipo" type="text" name="tipo" value={tipo} onChange={this.escutadorDeInput}/>
+          </div>
 
-        <button onClick={this.submitFormulario} type="button">Salvar</button>
+          <div className="input-field col s4">
+            <label htmlFor="data">Data</label>
+            <input className="datepicker" id="data" type="text" name="data" value={data} onChange={this.escutadorDeInput}/>
+          </div>
+        </div>
+        <button className="waves-effect waves-light btn"
+                onClick={this.submitFormulario} type="button">Salvar</button>
       </form>
     );
   }

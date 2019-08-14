@@ -1,7 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import './App.css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+
 import TabelaMovimentacao from './movimentacao/TabelaMovimentacao.js';
 import FormularioMovimentacao from './movimentacao/FormularioMovimentacao.js';
+import Header from './geral/Header.js';
 
 class App extends Component{
   state = {
@@ -45,8 +49,11 @@ class App extends Component{
   render() {
     return (
       <Fragment>
-        <TabelaMovimentacao movimentacoes={this.state.movimentacoes } removeMovimentacao = { this.removeMovimentacao } />
-        <FormularioMovimentacao adicionaMovimentacao={this.adicionaMovimentacao}/>
+        <Header />
+        <div className="container mb-10">
+          <TabelaMovimentacao movimentacoes={this.state.movimentacoes } removeMovimentacao = { this.removeMovimentacao } />
+          <FormularioMovimentacao adicionaMovimentacao={this.adicionaMovimentacao}/>
+        </div>
       </Fragment>
     );
   }

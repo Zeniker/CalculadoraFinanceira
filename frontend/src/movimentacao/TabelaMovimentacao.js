@@ -19,7 +19,11 @@ const TableBody = props =>{
           <td>{linha.valor}</td>
           <td>{linha.tipo}</td>
           <td>{linha.data}</td>
-          <td><button onClick = {() => { props.removeMovimentacao(index) } } >remover</button></td>
+          <td><button
+            onClick = {() => { props.removeMovimentacao(index) } }
+            className="waves-light btn"
+            >remover</button>
+          </td>
         </tr>
       );
     });
@@ -36,7 +40,7 @@ class TabelaMovimentacao extends Component{
     const { movimentacoes, removeMovimentacao } = this.props;
 
     return(
-        <table>
+        <table className="centered highlight">
           <TableHead/>
           <TableBody movimentacoes = { movimentacoes } removeMovimentacao = {removeMovimentacao} />
         </table>
