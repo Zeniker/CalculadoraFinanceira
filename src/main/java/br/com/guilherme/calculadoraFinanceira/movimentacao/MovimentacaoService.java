@@ -6,6 +6,7 @@ import br.com.guilherme.calculadoraFinanceira.movimentacao.dto.CriarMovimentacao
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,15 @@ public class MovimentacaoService {
     public Movimentacao buscarMovimentacao(Integer idMovimentacao){
         Optional<Movimentacao> movimentacaoOptional = movimentacaoRepository.findById(idMovimentacao);
         return movimentacaoOptional.orElse(null);
+    }
+
+    public List<Movimentacao> listarPorAnoMes(Integer idConta, Integer ano, Integer mes){
+        Conta conta = contaService.buscarContaPor(idConta);
+
+        return movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
+                Movimentacao.StatusMovimentacao.ATIVO,
+                ano,
+                mes);
     }
 
 }

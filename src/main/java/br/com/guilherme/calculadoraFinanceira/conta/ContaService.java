@@ -1,6 +1,7 @@
 package br.com.guilherme.calculadoraFinanceira.conta;
 
 import br.com.guilherme.calculadoraFinanceira.conta.dto.ContaDTO;
+import br.com.guilherme.calculadoraFinanceira.conta.exceptions.ContaNaoEncontradaException;
 import br.com.guilherme.calculadoraFinanceira.movimentacao.MovimentacaoRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,24 +30,22 @@ public class ContaService {
     }
 
     @Transactional
-    public Conta buscarContaPor(Integer idConta){
+    public Conta buscarContaPor(Integer idConta) {
         Optional<Conta> contaOptional = contaRepository.findById(idConta);
-        return contaOptional.orElse(null);
+        return contaOptional.orElseThrow(ContaNaoEncontradaException::new);
     }
 
     @Transactional
-    public void atualizarConta(Integer idConta, ContaDTO contaDTO) throws Exception{
-        Optional<Conta> contaOptional = contaRepository.findById(idConta);
-        Conta conta = contaOptional.orElseThrow(() -> new Exception("Conta não encontrada"));
+    public void atualizarConta(Integer idConta, ContaDTO contaDTO) {
+        Conta conta = this.buscarContaPor(idConta);
 
         conta.setNomePessoa(contaDTO.getNomePessoa());
         contaRepository.save(conta);
     }
 
     @Transactional
-    public void deletarConta(Integer idConta) throws Exception{
-        Optional<Conta> contaOptional = contaRepository.findById(idConta);
-        Conta conta = contaOptional.orElseThrow(() -> new Exception("Conta não encontrada"));
+    public void deletarConta(Integer idConta) {
+        Conta conta = this.buscarContaPor(idConta);
 
         contaRepository.delete(conta);
     }
@@ -58,9 +57,8 @@ public class ContaService {
         return calculadoraSaldoConta.calculaPorAnoMes(conta, yearMonth);
     }
 
-    public BigDecimal buscarSaldoMesConta(Integer idConta, Integer ano, Integer mes) throws Exception{
-        Optional<Conta> contaOptional = contaRepository.findById(idConta);
-        Conta conta = contaOptional.orElseThrow(() -> new Exception("Conta não encontrada"));
+    public BigDecimal buscarSaldoMesConta(Integer idConta, Integer ano, Integer mes) {
+        Conta conta = this.buscarContaPor(idConta);
 
         return this.buscarSaldoMesConta(conta, ano, mes);
     }
