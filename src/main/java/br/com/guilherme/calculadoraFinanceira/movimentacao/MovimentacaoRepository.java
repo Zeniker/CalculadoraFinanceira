@@ -18,6 +18,9 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Inte
      * @param status Status em que as movimentações devem estar
      * @return Retorna a lista de movimentações encontradas baseado nos parâmetros acima
      */
-    @Query("select mov from Movimentacao mov where mov.conta = ?1 and month(mov.dataCobranca) = ?2 and mov.status = ?3")
-    public List<Movimentacao> getMovimentacaoByContaAndDataCobrancaMonthAndStatus(Conta conta, Integer month, Movimentacao.StatusMovimentacao status);
+    @Query("select mov from Movimentacao mov where mov.conta = ?1 and mov.status = ?2 and year(mov.dataCobranca) = ?3 and month(mov.dataCobranca) = ?4")
+    public List<Movimentacao> getMovimentacaoByContaAndDataCobrancaMonthAndStatus(Conta conta,
+                                                                                  Movimentacao.StatusMovimentacao status,
+                                                                                  Integer ano,
+                                                                                  Integer mes);
 }

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,10 +70,14 @@ public class MovimentacaoRepositoryTest {
         mov = criaMovimentacao(Movimentacao.StatusMovimentacao.INATIVO, LocalDate.now().plusMonths(1));
         movimentacaoRepository.save(mov);
 
+        mov = criaMovimentacao(Movimentacao.StatusMovimentacao.INATIVO, LocalDate.now().plusYears(1));
+        movimentacaoRepository.save(mov);
+
 
         List<Movimentacao> movimentacaoList = movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
-                LocalDate.now().getMonth().getValue(),
-                Movimentacao.StatusMovimentacao.ATIVO);
+                Movimentacao.StatusMovimentacao.ATIVO,
+                YearMonth.now().getYear(),
+                YearMonth.now().getMonthValue());
 
         assertEquals(2, movimentacaoList.size());
         assertTrue(listaIds.contains(movimentacaoList.get(0).getId()));

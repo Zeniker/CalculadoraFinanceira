@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping(value = "/conta")
@@ -65,6 +66,20 @@ public class ContaController {
             responseDTO = new DeletarContaResponseDTO();
         }catch (Exception e){
             responseDTO = new DeletarContaResponseDTO(e);
+        }
+
+        return responseDTO;
+    }
+
+    @RequestMapping(value = "/{idConta}/saldo", method = RequestMethod.GET)
+    public BuscarSaldoResponseDTO buscarSaldo(@PathVariable Integer idConta, @RequestParam Integer ano, @RequestParam Integer mes){
+        BuscarSaldoResponseDTO responseDTO;
+        try{
+            responseDTO = new BuscarSaldoResponseDTO(
+                    contaService.buscarSaldoMesConta(idConta, ano, mes)
+            );
+        }catch (Exception e){
+            responseDTO = new BuscarSaldoResponseDTO(e);
         }
 
         return responseDTO;

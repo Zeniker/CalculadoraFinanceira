@@ -5,29 +5,31 @@ import br.com.guilherme.calculadoraFinanceira.movimentacao.MovimentacaoRepositor
 
 import java.math.BigDecimal;
 import java.time.Month;
+import java.time.YearMonth;
 import java.util.List;
 
 /**
  * Calculadora de saldo de uma conta
  */
-public class CalculadoraSaldoMesConta {
+public class CalculadoraSaldoConta {
 
     private final MovimentacaoRepository movimentacaoRepository;
 
-    public CalculadoraSaldoMesConta(MovimentacaoRepository movimentacaoRepository){
+    public CalculadoraSaldoConta(MovimentacaoRepository movimentacaoRepository){
 
         this.movimentacaoRepository = movimentacaoRepository;
     }
 
     /**
      * @param conta Conta que deve ser calculado o saldo
-     * @param month Mês relativo do saldo
+     * @param anoMes ano e mês do saldo
      * @return BigDecimal do saldo calculado
      */
-    public BigDecimal calcula(Conta conta, Month month){
+    public BigDecimal calculaPorAnoMes(Conta conta, YearMonth anoMes){
         List<Movimentacao> movimentacoes = movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
-                month.getValue(),
-                Movimentacao.StatusMovimentacao.ATIVO);
+                Movimentacao.StatusMovimentacao.ATIVO,
+                anoMes.getYear(),
+                anoMes.getMonthValue());
 
         return movimentacoes.stream().map(Movimentacao::getSaldo).reduce(BigDecimal.ZERO, BigDecimal::add);
     }

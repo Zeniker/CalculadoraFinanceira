@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,17 +57,18 @@ public class CalculadoraSaldoMesContaTest {
         incluiNovaMovimentacao(LocalDate.now(), new BigDecimal("150"));
         incluiNovaMovimentacao(LocalDate.now(), new BigDecimal("200"));
         incluiNovaMovimentacao(LocalDate.now().plusMonths(1), new BigDecimal("200"));
+        incluiNovaMovimentacao(LocalDate.now().plusYears(1), new BigDecimal("1200"));
 
-        CalculadoraSaldoMesConta calculadoraSaldoMesConta = new CalculadoraSaldoMesConta(movimentacaoRepository);
-        BigDecimal saldo = calculadoraSaldoMesConta.calcula(conta, LocalDate.now().getMonth());
+        CalculadoraSaldoConta calculadoraSaldoMesConta = new CalculadoraSaldoConta(movimentacaoRepository);
+        BigDecimal saldo = calculadoraSaldoMesConta.calculaPorAnoMes(conta, YearMonth.now());
 
         assertEquals(new BigDecimal("350.00"), saldo);
     }
 
     @Test
     public void calculaSaldoMesSemMovimentacao() {
-        CalculadoraSaldoMesConta calculadoraSaldoMesConta = new CalculadoraSaldoMesConta(movimentacaoRepository);
-        BigDecimal saldo = calculadoraSaldoMesConta.calcula(conta, LocalDate.now().getMonth());
+        CalculadoraSaldoConta calculadoraSaldoMesConta = new CalculadoraSaldoConta(movimentacaoRepository);
+        BigDecimal saldo = calculadoraSaldoMesConta.calculaPorAnoMes(conta, YearMonth.now());
 
         assertEquals(BigDecimal.ZERO, saldo);
     }
