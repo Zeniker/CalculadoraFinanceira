@@ -1,0 +1,22 @@
+version: '3'
+services:
+  maven:
+    image: maven:3-jdk-8
+    container_name: calculadora-financeira-maven
+    volumes:
+      - "./:/etc/projeto"
+      - "$HOME/.m2:/root/.m2"
+    working_dir: /etc/projeto
+#    command: ["mvn", "clean", "install"]
+    command: "echo 'blau'"
+  app:
+    image: openjdk:8-jdk-alpine
+    container_name: calculadora-financeira-app
+    volumes:
+      - "./:/etc/projeto"
+    working_dir: /etc/projeto/target
+    command: ["java", "-jar", "calculadoraFinanceira-0.0.1-SNAPSHOT.jar"]
+    depends_on:
+      - maven
+    ports:
+      - "8080:8080"
