@@ -6,8 +6,8 @@ class FormularioMovimentacao extends Component {
 
     this.stateInicial = {
       valor: '',
-      tipo: '',
-      data: '',
+      tipoMovimentacao: '',
+      dataOperacao: '',
     };
 
     this.state = this.stateInicial;
@@ -28,25 +28,24 @@ class FormularioMovimentacao extends Component {
 
   render(){
 
-    const { valor, tipo, data } = this.state;
+    const { valor, tipoMovimentacao, dataOperacao } = this.state;
 
     return (
       <form>
         <div className="row">
           <div className="input-field col s4">
-
             <input id="valor" type="text" name="valor" value={valor} onChange={this.escutadorDeInput}/>
             <label htmlFor="valor">Valor</label>
           </div>
 
           <div className="input-field col s4">
             <label htmlFor="tipo">Tipo</label>
-            <input id="tipo" type="text" name="tipo" value={tipo} onChange={this.escutadorDeInput}/>
+            <input id="tipo" type="text" name="tipoMovimentacao" value={tipoMovimentacao} onChange={this.escutadorDeInput}/>
           </div>
 
           <div className="input-field col s4">
             <label htmlFor="data">Data</label>
-            <input className="datepicker" id="data" type="text" name="data" value={data} onChange={this.escutadorDeInput}/>
+            <input id="data" type="text" name="dataOperacao" value={dataOperacao} onChange={this.escutadorDeInput}/>
           </div>
         </div>
         <button className="waves-effect waves-light btn"

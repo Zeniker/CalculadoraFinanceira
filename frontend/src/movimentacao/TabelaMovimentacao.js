@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import $ from "jquery";
 
 const TableHead = () =>{
   return (
@@ -17,8 +18,8 @@ const TableBody = props =>{
       return (
         <tr key={index}>
           <td>{linha.valor}</td>
-          <td>{linha.tipo}</td>
-          <td>{linha.data}</td>
+          <td>{linha.tipoMovimentacao}</td>
+          <td>{linha.dataOperacao}</td>
           <td><button
             onClick = {() => { props.removeMovimentacao(index) } }
             className="waves-light btn"
@@ -36,13 +37,43 @@ const TableBody = props =>{
 };
 
 class TabelaMovimentacao extends Component{
+
+  constructor(){
+    super();
+    this.state = {
+      movimentacoes: []
+    }
+  }
+
+  //Chama logo após renderizar componente
+  componentDidMount(){
+    let requestData = {
+      ano: 2019,
+      mes: 8,
+      idConta: 1
+    };
+
+    $.ajax({
+      url: 'http://localhost:8080/movimentacao/listar',
+      type: 'get',
+      data: requestData,
+      dataType: 'json',
+      success: function(resposta){
+        this.setState({movimentacoes: resposta.movimentacoes});
+      }.bind(this),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
+  }
+
   render(){
-    const { movimentacoes, removeMovimentacao } = this.props;
+    const { removeMovimentacao } = this.props;
 
     return(
         <table className="centered highlight">
           <TableHead/>
-          <TableBody movimentacoes = { movimentacoes } removeMovimentacao = {removeMovimentacao} />
+          <TableBody movimentacoes = { this.state.movimentacoes } removeMovimentacao = {removeMovimentacao} />
         </table>
     );
   }
