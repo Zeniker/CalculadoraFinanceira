@@ -2,6 +2,7 @@ package br.com.guilherme.calculadoraFinanceira.cartao.dto;
 
 import br.com.guilherme.calculadoraFinanceira.cartao.Cartao;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class CartaoDTO {
@@ -12,10 +13,13 @@ public class CartaoDTO {
     private Integer idConta;
 
     @NotNull
+    @NotEmpty
     private String bandeira;
 
     private String banco;
 
+    @NotNull
+    @NotEmpty
     private String apelido;
 
     public CartaoDTO(){

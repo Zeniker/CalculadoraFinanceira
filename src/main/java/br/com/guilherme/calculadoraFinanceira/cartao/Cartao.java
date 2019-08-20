@@ -4,6 +4,7 @@ import br.com.guilherme.calculadoraFinanceira.conta.Conta;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cartao {
@@ -21,6 +22,7 @@ public class Cartao {
 
     private String banco;
 
+    @NotNull
     private String apelido;
 
     public Integer getId() {
