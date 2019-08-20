@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
-import PubSub from 'pubsub-js';
+import React from 'react';
 
-class InputCustomizado extends Component{
+import FormInputCustomizado from './FormInputCustomizado.js';
 
-  constructor(){
-    super();
-    this.state = {
-      msgErro: ''
-    };
-  }
+class InputCustomizado extends FormInputCustomizado{
 
   render(){
     const { id, label, onChange, colClass, valor, tipo } = this.props;
@@ -20,18 +14,6 @@ class InputCustomizado extends Component{
         <span>{this.state.msgErro}</span>
       </div>
     );
-  }
-
-  componentDidMount(){
-    PubSub.subscribe("erro-validacao", function (topico, erro) {
-      if(erro.field === this.props.id){
-        this.setState({msgErro: erro.defaultMessage});
-      }
-    }.bind(this));
-
-    PubSub.subscribe("limpar-erros-validacao", function(topico, erro){
-      this.setState({msgErro: ''});
-    }.bind(this));
   }
 }
 
