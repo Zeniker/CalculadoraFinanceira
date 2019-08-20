@@ -46,7 +46,7 @@ public class CartaoController {
         return responseDTO;
     }
 
-    @RequestMapping(value = "/lista/{idConta}", method = RequestMethod.GET)
+    @RequestMapping(value = "/listar/{idConta}", method = RequestMethod.GET)
     public ListarCartoesContaResponseDTO listarCartoesConta(@PathVariable Integer idConta){
         ListarCartoesContaResponseDTO responseDTO;
         try {
