@@ -43,7 +43,7 @@ public class MovimentacaoService {
     public List<Movimentacao> listarPorAnoMes(Integer idConta, Integer ano, Integer mes){
         Conta conta = contaService.buscarContaPor(idConta);
 
-        return movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
+        return movimentacaoRepository.findByMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
                 Movimentacao.StatusMovimentacao.ATIVO,
                 ano,
                 mes);

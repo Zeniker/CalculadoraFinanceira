@@ -19,8 +19,8 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Inte
      * @return Retorna a lista de movimentações encontradas baseado nos parâmetros acima
      */
     @Query("select mov from Movimentacao mov where mov.conta = ?1 and mov.status = ?2 and year(mov.dataCobranca) = ?3 and month(mov.dataCobranca) = ?4")
-    public List<Movimentacao> getMovimentacaoByContaAndDataCobrancaMonthAndStatus(Conta conta,
-                                                                                  Movimentacao.StatusMovimentacao status,
-                                                                                  Integer ano,
-                                                                                  Integer mes);
+    public List<Movimentacao> findByMovimentacaoByContaAndDataCobrancaMonthAndStatus(Conta conta,
+                                                                                     Movimentacao.StatusMovimentacao status,
+                                                                                     Integer ano,
+                                                                                     Integer mes);
 }

@@ -74,7 +74,7 @@ public class MovimentacaoRepositoryTest {
         movimentacaoRepository.save(mov);
 
 
-        List<Movimentacao> movimentacaoList = movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
+        List<Movimentacao> movimentacaoList = movimentacaoRepository.findByMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
                 Movimentacao.StatusMovimentacao.ATIVO,
                 YearMonth.now().getYear(),
                 YearMonth.now().getMonthValue());

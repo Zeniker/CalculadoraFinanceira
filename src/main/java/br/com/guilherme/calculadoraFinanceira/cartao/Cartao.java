@@ -16,6 +16,7 @@ public class Cartao {
     @ManyToOne
     private Conta conta;
 
+    @Enumerated(EnumType.STRING)
     private CartaoBandeira bandeira;
 
     private String banco;

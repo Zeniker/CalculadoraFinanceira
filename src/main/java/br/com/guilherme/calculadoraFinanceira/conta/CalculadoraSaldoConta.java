@@ -4,7 +4,6 @@ import br.com.guilherme.calculadoraFinanceira.movimentacao.Movimentacao;
 import br.com.guilherme.calculadoraFinanceira.movimentacao.MovimentacaoRepository;
 
 import java.math.BigDecimal;
-import java.time.Month;
 import java.time.YearMonth;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class CalculadoraSaldoConta {
      * @return BigDecimal do saldo calculado
      */
     public BigDecimal calculaPorAnoMes(Conta conta, YearMonth anoMes){
-        List<Movimentacao> movimentacoes = movimentacaoRepository.getMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
+        List<Movimentacao> movimentacoes = movimentacaoRepository.findByMovimentacaoByContaAndDataCobrancaMonthAndStatus(conta,
                 Movimentacao.StatusMovimentacao.ATIVO,
                 anoMes.getYear(),
                 anoMes.getMonthValue());
