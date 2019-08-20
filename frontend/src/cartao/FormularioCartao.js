@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import $ from "jquery";
+import M from 'materialize-css';
 
 //Componentes
 import InputCustomizado from '../componentes/InputCustomizado.js';
+import SelectCustomizado from '../componentes/SelectCustomizado.js';
 
 class FormularioMovimentacao extends Component {
   constructor(props){
@@ -19,6 +22,7 @@ class FormularioMovimentacao extends Component {
 
   escutadorDeInput = event => {
     const { name, value } = event.target;
+    console.log(value);
 
     this.setState({
       [name] : value
@@ -26,37 +30,58 @@ class FormularioMovimentacao extends Component {
   };
 
   submitFormulario = () => {
-    this.props.adicionaMovimentacao(this.state);
-    this.setState(this.stateInicial);
+    $.ajax({
+      url: 'http://localhost:8080/cartao',
+      type: 'post',
+      contentType: 'application/json',
+      data: JSON.stringify(this.state),
+      dataType: 'json',
+      success: function(resposta){
+        console.log(resposta);
+      },
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
+
+    // this.salvaDadosCartao(this.state);
+  };
+
+  // salvaDadosCartao = dados => {
+  //
+  // };
+
+  componentDidMount = () => {
+    let elementos = document.querySelectorAll('select');
+    M.FormSelect.init(elementos, {});
   };
 
   render(){
 
     const { bandeira, banco, apelido } = this.state;
 
+    let opcoes = [
+      {
+        valor: 'MASTERCARD',
+        descricao: 'Mastercard'
+      },
+      {
+        valor: 'VISA',
+        descricao: 'Visa'
+      }
+    ];
+
     return (
       <form>
         <div className="row">
-
           <InputCustomizado id="apelido" label="Apelido" onChange={this.escutadorDeInput} colClass="s4"
                             valor={apelido} tipo="text"/>
 
           <InputCustomizado id="banco" label="Banco" onChange={this.escutadorDeInput} colClass="s4"
                             valor={banco} tipo="text"/>
-          {/*<div className="input-field col s4">*/}
-            {/*<input id="valor" type="text" name="valor" value={valor} onChange={this.escutadorDeInput}/>*/}
-            {/*<label htmlFor="valor">Valor</label>*/}
-          {/*</div>*/}
 
-          {/*<div className="input-field col s4">*/}
-            {/*<label htmlFor="tipo">Tipo</label>*/}
-            {/*<input id="tipo" type="text" name="tipoMovimentacao" value={tipoMovimentacao} onChange={this.escutadorDeInput}/>*/}
-          {/*</div>*/}
-
-          {/*<div className="input-field col s4">*/}
-            {/*<label htmlFor="data">Data</label>*/}
-            {/*<input id="data" type="text" name="dataOperacao" value={dataOperacao} onChange={this.escutadorDeInput}/>*/}
-          {/*</div>*/}
+          <SelectCustomizado id="bandeira" label="Bandeira" onChange={this.escutadorDeInput} colClass="s4"
+                             valor={bandeira} opcoes={opcoes} />
         </div>
         <button className="waves-effect waves-light btn"
                 onClick={this.submitFormulario} type="button">Salvar</button>
