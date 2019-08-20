@@ -11,7 +11,7 @@ import TabelaMovimentacao from './movimentacao/TabelaMovimentacao.js';
 
 //Cartao
 import TabelaCartao from './cartao/TabelaCartao.js';
-import FormularioCartao from './cartao/FormularioCartao.js';
+import CadastroCartao from './cartao/CadastroCartao.js';
 
 
 import Header from './geral/Header.js';
@@ -44,24 +44,12 @@ class App extends Component{
             <Header/>
             <Route path="/" exact component={TabelaMovimentacao}/>
             <Route path="/cartao" exact component={TabelaCartao}/>
-            <Route path="/cartao/alterar" exact component={FormularioCartao}/>
+            <Route path="/cartao/novo" exact component={CadastroCartao}/>
           </Router>
         </div>
       </Fragment>
     );
   }
-
-  // render() {
-  //   return (
-  //     <Fragment>
-  //       <Header />
-  //       <div className="container mb-10">
-  //         <TabelaMovimentacao removeMovimentacao = { this.removeMovimentacao } />
-  //         <FormularioMovimentacao adicionaMovimentacao={this.adicionaMovimentacao}/>
-  //       </div>
-  //     </Fragment>
-  //   );
-  // }
 }
 
 export default App;

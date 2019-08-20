@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import $ from "jquery";
 import M from 'materialize-css';
 
 //Componentes
@@ -30,33 +29,15 @@ class FormularioMovimentacao extends Component {
   };
 
   submitFormulario = () => {
-    $.ajax({
-      url: 'http://localhost:8080/cartao',
-      type: 'post',
-      contentType: 'application/json',
-      data: JSON.stringify(this.state),
-      dataType: 'json',
-      success: function(resposta){
-        console.log(resposta);
-      },
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-
-    // this.salvaDadosCartao(this.state);
+    this.props.funcaoSubmit(this.state);
   };
 
-  // salvaDadosCartao = dados => {
-  //
-  // };
-
-  componentDidMount = () => {
+  componentDidMount() {
     let elementos = document.querySelectorAll('select');
     M.FormSelect.init(elementos, {});
   };
 
-  render(){
+  render() {
 
     const { bandeira, banco, apelido } = this.state;
 
@@ -83,11 +64,11 @@ class FormularioMovimentacao extends Component {
           <SelectCustomizado id="bandeira" label="Bandeira" onChange={this.escutadorDeInput} colClass="s4"
                              valor={bandeira} opcoes={opcoes} />
         </div>
-        <button className="waves-effect waves-light btn"
+        <button className="btn"
                 onClick={this.submitFormulario} type="button">Salvar</button>
       </form>
     );
-  }
+  };
 }
 
 export default FormularioMovimentacao;

@@ -62,7 +62,7 @@ class TabelaCartao extends Component{
 
     return(
       <Fragment>
-        <Link to={`${match.path}/alterar`} >
+        <Link to={`${match.path}/novo`} >
           <button className="waves-effect waves-light btn mt-10 float-right">
             Novo
           </button>
