@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
-import $ from "jquery";
+import FetchGet from '../service/FetchGet.js';
 
 const TableHead = () =>{
   return (
@@ -43,17 +43,25 @@ class TabelaCartao extends Component{
 
   //Chama logo após renderizar componente
   componentDidMount(){
-    $.ajax({
-      url: 'http://localhost:8080/cartao/listar/1',
-      type: 'get',
-      dataType: 'json',
-      success: function(resposta){
-        this.setState({cartoes: resposta.cartoes});
-      }.bind(this),
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
+    let fetchGet = new FetchGet();
+    fetchGet.realizarRequest('http://localhost:8080/cartao/listar/1')
+      .then(respostaResolve => {
+        this.setState({ cartoes: respostaResolve.cartoes });
+      }, respostaReject => {
+        console.log(respostaReject.error);
+      });
+
+    // $.ajax({
+    //   url: 'http://localhost:8080/cartao/listar/1',
+    //   type: 'get',
+    //   dataType: 'json',
+    //   success: function(resposta){
+    //     this.setState({cartoes: resposta.cartoes});
+    //   }.bind(this),
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*'
+    //   }
+    // });
   }
 
   render(){

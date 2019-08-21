@@ -26,14 +26,14 @@ class CadastroCartao extends Component {
   salvaDadosCartao = dados => {
     let fetchPost = new FetchPost();
     PubSub.publish("limpar-erros-validacao", {});
-    fetchPost.realizarRequest('http://localhost:8080/cartao', dados)
+    fetchPost.realizarRequest('http://localhost:8081/cartao', dados)
       .then(resolveResponse => {
         this.finalizaCadastro();
       }, rejectResponse => {
         if(rejectResponse.status === 400){
           new TratadorErroValidacao().publicaErros(rejectResponse);
         }else{
-          console.log(rejectResponse.error);
+          console.log(rejectResponse);
         }
       });
   };

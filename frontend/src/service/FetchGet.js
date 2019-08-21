@@ -1,28 +1,25 @@
 import CustomFetch from "./CustomFetch";
 
-class FetchPost extends CustomFetch {
+class FetchGet extends CustomFetch {
 
   getHeader = () => {
     let header = new Headers();
     header.append("Access-Control-Allow-Origin", '*');
-    header.append("Content-Type", 'application/json');
 
     return header;
   };
 
-  getRequest = (header, corpoRequisicao) => {
-     return {
-      method : 'POST',
+  getRequest = (header) => {
+    return {
+      method : 'GET',
       mode: 'cors',
-      body: JSON.stringify(corpoRequisicao),
       headers: header
     };
   };
 
-  realizarRequest = (url, dados) => {
+  realizarRequest = (url) => {
     let request = this.getRequest(
-      this.getHeader(),
-      dados
+      this.getHeader()
     );
 
     return this.executaFetch(url, request);
@@ -30,4 +27,4 @@ class FetchPost extends CustomFetch {
 
 }
 
-export default FetchPost;
+export default FetchGet;
