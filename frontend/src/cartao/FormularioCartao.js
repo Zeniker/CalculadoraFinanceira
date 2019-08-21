@@ -21,7 +21,6 @@ class FormularioMovimentacao extends Component {
 
   escutadorDeInput = event => {
     const { name, value } = event.target;
-    console.log(value);
 
     this.setState({
       [name] : value

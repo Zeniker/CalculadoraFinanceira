@@ -1,11 +1,13 @@
 import React, {Component, Fragment} from 'react';
-import $ from "jquery";
 import { Redirect } from 'react-router-dom';
 import PubSub from 'pubsub-js';
 
 //Componentes
 import FormularioCartao from './FormularioCartao.js';
 import TratadorErroValidacao from '../erros/TratadorErroValidacao.js';
+
+//Service
+import FetchPost from '../service/FetchPost.js';
 
 class CadastroCartao extends Component {
   constructor(props){
@@ -19,39 +21,28 @@ class CadastroCartao extends Component {
       redirect: false
     };
 
-    this.salvaDadosCartao = this.salvaDadosCartao.bind(this);
-    this.finalizaCadastro = this.finalizaCadastro.bind(this);
   }
 
-  salvaDadosCartao(dados){
-    $.ajax({
-      url: 'http://localhost:8080/cartao',
-      type: 'post',
-      contentType: 'application/json',
-      data: JSON.stringify(dados),
-      dataType: 'json',
-      success: function (resposta) {
+  salvaDadosCartao = dados => {
+    let fetchPost = new FetchPost();
+    PubSub.publish("limpar-erros-validacao", {});
+    fetchPost.realizarRequest('http://localhost:8080/cartao', dados)
+      .then(resolveResponse => {
         this.finalizaCadastro();
-      }.bind(this),
-      error: function(resposta){
-        if(resposta.status === 400){
-          new TratadorErroValidacao().publicaErros(resposta.responseJSON);
+      }, rejectResponse => {
+        if(rejectResponse.status === 400){
+          new TratadorErroValidacao().publicaErros(rejectResponse);
+        }else{
+          console.log(rejectResponse.error);
         }
-      },
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      beforeSend: function(){
-        PubSub.publish("limpar-erros-validacao", {});
-      }
-    });
+      });
   };
 
-  finalizaCadastro(){
+  finalizaCadastro = () => {
     this.setState({redirect: true});
-  }
+  };
 
-  renderRedirect(){
+  renderRedirect = () => {
     if(this.state.redirect === true){
       return (
         <Redirect to="/cartao" />
